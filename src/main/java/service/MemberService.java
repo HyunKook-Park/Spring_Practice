@@ -1,5 +1,6 @@
 package service;
 
+import dto.MemberDetailResponseDto;
 import dto.MemberSaveRequestDto;
 import dto.MemberSaveResponseDto;
 import dto.MemberSimpleResponseDto;
@@ -32,6 +33,10 @@ public class MemberService {
             memberSimpleResponseDtoList.add(memberSimpleResponseDto);
         }
         return memberSimpleResponseDtoList;
+    }
 
+    public MemberDetailResponseDto getMember(Long id){
+        Member member = memberRepository.findById(id).orElseThrow(() -> new NullPointerException("member is not exists"));
+        return new MemberDetailResponseDto(member.getId(), member.getName());
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import dto.MemberDetailResponseDto;
 import dto.MemberSaveRequestDto;
 import dto.MemberSaveResponseDto;
 import dto.MemberSimpleResponseDto;
@@ -25,5 +26,10 @@ public class MemberController {
     @GetMapping("/members")
     public ResponseEntity<List<MemberSimpleResponseDto>> getAllMembers(){
         return ResponseEntity.ok(memberService.getMembers());
+    }
+
+    @GetMapping("/members/{Id}")
+    public ResponseEntity<MemberDetailResponseDto> getMember(@PathVariable Long Id){
+        return ResponseEntity.ok(memberService.getMember(Id));
     }
 }

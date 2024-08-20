@@ -43,4 +43,10 @@ public class MemberService {
         member.update(requestDto.getName());
         return new MemberUpdateResponseDto(member.getId(), member.getName());
     }
+
+    @Transactional
+    public void deleteMember(Long id){
+        Member member = memberRepository.findById(id).orElseThrow(() -> new NullPointerException("member is not exists"));
+        memberRepository.delete(member);
+    }
 }

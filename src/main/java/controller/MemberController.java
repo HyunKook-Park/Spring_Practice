@@ -1,9 +1,6 @@
 package controller;
 
-import dto.MemberDetailResponseDto;
-import dto.MemberSaveRequestDto;
-import dto.MemberSaveResponseDto;
-import dto.MemberSimpleResponseDto;
+import dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,5 +28,10 @@ public class MemberController {
     @GetMapping("/members/{Id}")
     public ResponseEntity<MemberDetailResponseDto> getMember(@PathVariable Long Id){
         return ResponseEntity.ok(memberService.getMember(Id));
+    }
+
+    @PutMapping("/members/{Id}")
+    public ResponseEntity<MemberUpdateResponseDto> updateMember(@PathVariable Long Id, @RequestBody MemberUpdateRequestDto requestDto){
+        return ResponseEntity.ok(memberService.updateMember(Id, requestDto));
     }
 }

@@ -1,9 +1,6 @@
 package service;
 
-import dto.MemberDetailResponseDto;
-import dto.MemberSaveRequestDto;
-import dto.MemberSaveResponseDto;
-import dto.MemberSimpleResponseDto;
+import dto.*;
 import entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,5 +35,12 @@ public class MemberService {
     public MemberDetailResponseDto getMember(Long id){
         Member member = memberRepository.findById(id).orElseThrow(() -> new NullPointerException("member is not exists"));
         return new MemberDetailResponseDto(member.getId(), member.getName());
+    }
+
+    @Transactional
+    public MemberUpdateResponseDto updateMember(Long id, MemberUpdateRequestDto requestDto){
+        Member member = memberRepository.findById(id).orElseThrow(() -> new NullPointerException("member is not exists"));
+        member.update(requestDto.getName());
+        return new MemberUpdateResponseDto(member.getId(), member.getName());
     }
 }
